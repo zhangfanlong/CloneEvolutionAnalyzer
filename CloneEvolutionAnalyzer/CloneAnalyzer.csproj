@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B21521F1-8B00-4E64-8167-04FB58463178}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CloneEvolutionAnalyzer</RootNamespace>
+    <AssemblyName>CloneEvolutionAnalyzer</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="IronPython, Version=2.7.0.40, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\IronPython 2.7\IronPython.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.Modules, Version=2.7.0.40, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\IronPython 2.7\IronPython.Modules.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamic, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\IronPython 2.7\Microsoft.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\IronPython 2.7\Microsoft.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting.Metadata, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\IronPython 2.7\Microsoft.Scripting.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BuildGenealogySettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BuildGenealogySettingForm.Designer.cs">
+      <DependentUpon>BuildGenealogySettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Statistic.cs" />
+    <Compile Include="FCMfaster.cs" />
+    <Compile Include="KFCM.cs" />
+    <Compile Include="CloneGenealogy.cs" />
+    <Compile Include="CloneGenealogyViz.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CloneRegionDescriptor.cs" />
+    <Compile Include="CloneClassSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CloneClassSettingForm.Designer.cs">
+      <DependentUpon>CloneClassSettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FCM.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MetricSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MetricSetting.Designer.cs">
+      <DependentUpon>MetricSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FragmentSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FragmentSettingForm.Designer.cs">
+      <DependentUpon>FragmentSettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GenealogyAllViz.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Diff.cs" />
+    <Compile Include="ExtractMetric.cs" />
+    <Compile Include="ShowEvaluationResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowEvaluationResult.Designer.cs">
+      <DependentUpon>ShowEvaluationResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RichTextBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ShowExtractResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowExtractResult.Designer.cs">
+      <DependentUpon>ShowExtractResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HalsteadMetric.cs" />
+    <Compile Include="LevenshteinDistance.cs" />
+    <Compile Include="Mapping.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MapSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MapSettingForm.Designer.cs">
+      <DependentUpon>MapSettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MetricCollection.cs" />
+    <Compile Include="Options.cs" />
+    <Compile Include="PreProcessing.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="ProgressBarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProgressBarForm.Designer.cs">
+      <DependentUpon>ProgressBarForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShowCodeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowCodeForm.Designer.cs">
+      <DependentUpon>ShowCodeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowDiffForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowDiffForm.Designer.cs">
+      <DependentUpon>ShowDiffForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="BuildGenealogySettingForm.resx">
+      <DependentUpon>BuildGenealogySettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CloneClassSettingForm.resx">
+      <DependentUpon>CloneClassSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MetricSetting.resx">
+      <DependentUpon>MetricSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FragmentSettingForm.resx">
+      <DependentUpon>FragmentSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowEvaluationResult.resx">
+      <DependentUpon>ShowEvaluationResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MapSettingForm.resx">
+      <DependentUpon>MapSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProgressBarForm.resx">
+      <DependentUpon>ProgressBarForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ShowCodeForm.resx">
+      <DependentUpon>ShowCodeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowDiffForm.resx">
+      <DependentUpon>ShowDiffForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowExtractResult.resx">
+      <DependentUpon>ShowExtractResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="CRDSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DesignOfGeneratingCRD.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

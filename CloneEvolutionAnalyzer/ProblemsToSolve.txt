@@ -1,0 +1,5 @@
+说明：
+1、对于不同的语言（java，C++，C，C#，Python等）有不同的参数设置要求。菜单中的Perferences项可以查看或修改参数设置。
+此功能有待完成。参数还应包括克隆代码检测的granularity（funtion or block），因为这个参数影响到CRD的生成。
+2、菜单项互斥的实现，有待完成。
+

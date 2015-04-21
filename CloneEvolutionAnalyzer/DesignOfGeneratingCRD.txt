@@ -1,0 +1,31 @@
+﻿//首先已经选定一个表示克隆代码（克隆类）的XML文件（判断根标签是否为<clones>）
+//新建CloneRegionDescriptor对象（以下简称CRD对象），用于保存该文件的CRD。
+//CRD对象的Filename属性，就是文件的路径信息（相对路径）。
+//对于java和C#语言，ClassName属性，就是文件的名字（类名与文件名相同）。对于其他语言，则需要从源代码中提取。
+//遍历所有<clone>或<class>元素。对于其中包含的每个<source>元素，根据file属性（相对路径）查找源代码文件。
+//按行读取源文件，以ArrayList保存，便于按行访问。
+//以行号作为索引，找到源文件中克隆代码所在的行。
+//若granularity=functions
+	//从克隆代码的开头扫描，获取方法名信息，写入MethodName属性。置BlockInfoList属性为null。
+//若granularity=blocks
+	//首先获取方法名信息；
+	//逐行向前扫描，由内向外获取块信息，添加到BlockInfoList中（怎样在List的头插入？）；
+	//向前扫描，直到遇到方法名标识符，停止。
+//扫描克隆代码段，获取CM信息（CollaborationMetric向量的七个字段）。
+
+//每段克隆代码的CRD生成完毕后，构造<CRD>元素，写入克隆代码对应的<source>元素下。
+//<CloneRegionDescriptor>元素的结构如下(带*的项可以没有，也可以多项.CollaMetric元素以属性表示6个数值项，以子元素表示2个集合项)：
+<CloneRegionDescriptor>
+	<fileName>filename</fileName>
+	<className>classname</className>
+	<methodName>methodname</methodName>
+	*<blockInfo>
+		<bType>if</bType>
+		<Anchor>expressions</Anchor>
+	</blockInfo>
+	*<blockInfo>.....</blockInfo>...
+	<CollaMetric variableDeclaration=4 sumOfVarDec=4 variableReference=4 sumOfVarRef=4 loopCount=4 branchCount=4>
+		<loopAnchorCollection>loop Anchor Collection Items</loopAnchorCollection>
+		<branchAnchorCollection>branch Anchor Collection Items</branchAnchorCollection>
+	</CollaMetric>
+</CloneRegionDescriptor>

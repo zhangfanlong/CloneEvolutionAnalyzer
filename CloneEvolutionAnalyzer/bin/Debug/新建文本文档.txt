@@ -1,0 +1,71 @@
+//调用python程序进行特征提取
+            //utf8.py用于转换xml文件的格式使得python可以处理
+            System.Diagnostics.Process p = new System.Diagnostics.Process(); 
+            //Process p = new Process();
+            p.StartInfo.FileName = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "python.exe";//python安装路径
+            string sArguments = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "utf8.py ";//所调用的python文件，预先放入项目Debug文件夹中
+            sArguments += _folderPath + @"\CRDFiles\blocks\";//...\utf8.py ...\CRDFiles\blocks\ 
+            p.StartInfo.Arguments = sArguments;
+            p.StartInfo.UseShellExecute = true;
+            //p.StartInfo.RedirectStandardOutput = true;
+            //p.StartInfo.RedirectStandardInput = true;
+            //p.StartInfo.RedirectStandardError = true;
+            //p.StartInfo.CreateNoWindow = true;
+            
+            p.Start();
+            //p.WaitForExit(30000);
+            MessageBox.Show("数据预处理完毕");
+            p.Close();
+
+            System.Diagnostics.Process q = new System.Diagnostics.Process(); 
+           // Process q = new Process();
+            q.StartInfo.FileName = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "python.exe";//python安装路径
+            //特征提取...\extract.py ...\CRDFiles\blocks\ ...\MAPFiles\blocks\
+            sArguments = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "extract.py " + _folderPath + @"\CRDFiles\blocks\ " + _folderPath + @"\MAPFiles\blocks\ ";
+            q.StartInfo.Arguments = sArguments;
+            q.StartInfo.UseShellExecute = true;
+            //q.StartInfo.RedirectStandardOutput = true;
+            //q.StartInfo.RedirectStandardInput = true;
+            //q.StartInfo.RedirectStandardError = true;
+            //q.StartInfo.CreateNoWindow = true;
+            
+            q.Start();
+            q.WaitForExit();
+            MessageBox.Show("特征提取完毕");
+           q.Close();
+
+            //关于Ironpython的尝试~~暂时放置
+            //p.WaitForExit();
+            //ScriptRuntime pyRunTime = Python.CreateRuntime();
+            //dynamic obj = pyRunTime.UseFile("utf8.py"); 
+
+
+
+
+
+
+
+
+
+
+Process q = new Process();
+            q.StartInfo.FileName = "cmd.exe";
+            //q.StartInfo.FileName = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "python.exe";//python安装路径
+            //特征提取...\extract.py ...\CRDFiles\blocks\ ...\MAPFiles\blocks\
+           // sArguments = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "extract.py " + _folderPath + @"\CRDFiles\blocks\ " + _folderPath + @"\MAPFiles\blocks\ ";
+            string sArguments3 = "cd " + System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;//所调用的python文件，预先放入项目Debug文件夹中
+            string sArguments4 = "extract.py " + _folderPath + @"\CRDFiles\blocks\ " + _folderPath + @"\MAPFiles\blocks\"; //...\utf8.py ...\CRDFiles\blocks\ 
+            q.StartInfo.Arguments = "/k " + sArguments3;
+            q.StartInfo.Arguments = "/k " + sArguments4;
+            //q.StartInfo.Arguments = "/k " + sArguments;
+            q.StartInfo.UseShellExecute = true;
+           // q.StartInfo.UseShellExecute = false;
+           // q.StartInfo.RedirectStandardOutput = true;
+           // q.StartInfo.RedirectStandardInput = true;
+           // q.StartInfo.RedirectStandardError = true;
+            //q.StartInfo.CreateNoWindow = true;
+            q.Start();
+            //p.WaitForExit(30000);
+
+           // MessageBox.Show(q.StandardOutput.ReadToEnd());
+            q.Close();

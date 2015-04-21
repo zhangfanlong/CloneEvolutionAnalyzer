@@ -1,0 +1,2 @@
+ctrl+e+c
+ctrl+e+u
