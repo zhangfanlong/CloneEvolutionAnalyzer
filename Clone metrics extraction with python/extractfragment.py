@@ -1,74 +1,37 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
+# -*- coding: UTF-8 -*-
 
-#·Ö°æ±¾³éÈ¡¿ËÂ¡Æ¬¶ÎµÄ¶ÈÁ¿Öµ
-#Ê¹ÓÃ´ÈÃÈºÍÀîÖÇ³¬Ô¤´¦Àí½á¹û
-
-#Ê¹ÓÃ·½·¨
-#ÃüÁî+Ä¿Â¼Ãû1+Ä¿Â¼Ãû2+Ä¿Â¼3
-#extract_fragment_version.py path\emCRDFiles\blocks\  path\MAPFiles\blocks\ path\arff_result\
-
-#½á¹ûÒÔÊı×Ö±£´æ
-
+'''
+#åˆ†ç‰ˆæœ¬æŠ½å–å…‹éš†ç‰‡æ®µçš„åº¦é‡å€¼
+#ä½¿ç”¨æ…ˆèŒå’Œææ™ºè¶…ç»“æœ
+#ä½¿ç”¨æ–¹æ³•
+#å‘½ä»¤+ç›®å½•å1+ç›®å½•å2
+#C:\Users\founder\extract.py E:\è®ºæ–‡èµ„æ–™\5å®éªŒç³»ç»Ÿ\wget-results\CRDFiles\blocks\ E:\è®ºæ–‡èµ„æ–™\5å®éªŒç³»ç»Ÿ\wget-results\MAPFiles\blocks\
+'''
 import re, sys, os
 import xml.dom.minidom
 import math
-import arff
 
-#¶ÁÈ¡crdÎÄ¼ş¼ĞÏÂµÄxmlÎÄ¼ş
+#è¯»å–crdæ–‡ä»¶å¤¹ä¸‹çš„xmlæ–‡ä»¶
 clonefile_list = os.listdir(sys.argv[1])
 mapfile_list = os.listdir(sys.argv[2])
-outputpath = sys.argv[3]
 
-#´´½¨±£´æ½á¹ûµÄÄ¿Â¼
-def mkdir(path):
-    # È¥³ıÊ×Î»¿Õ¸ñ
-    path=path.strip()
-    # È¥³ıÎ²²¿ \ ·ûºÅ
-    path=path.rstrip("\\")
- 
-    # ÅĞ¶ÏÂ·¾¶ÊÇ·ñ´æÔÚ
-    # ´æÔÚ     True
-    # ²»´æÔÚ   False
-    isExists=os.path.exists(path)
- 
-    # ÅĞ¶Ï½á¹û
-    if not isExists:
-        # Èç¹û²»´æÔÚÔò´´½¨Ä¿Â¼
-        #print path+' ´´½¨³É¹¦'
-        # ´´½¨Ä¿Â¼²Ù×÷º¯Êı
-        os.makedirs(path)
-        return True
-    else:
-        # Èç¹ûÄ¿Â¼´æÔÚÔò²»´´½¨£¬²¢ÌáÊ¾Ä¿Â¼ÒÑ´æÔÚ
-        #print path+' Ä¿Â¼ÒÑ´æÔÚ'
-        return False
 
-#±àÂë×ª»» gb2312 -> utf-8
-def convert_ecoding(file):
-	f=open(file,'r').read()
-	f=f.replace('<?xml version="1.0" encoding="gb2312"?>','<?xml version="1.0" encoding="utf-8"?>')
-	f=unicode(f,encoding='gb2312').encode('utf-8')
-	return f
-
-#³éÈ¡µÚÒ»¸ö°æ±¾µÄ¿ËÂ¡´úÂë¶ÈÁ¿
+#æŠ½å–ç¬¬ä¸€ä¸ªç‰ˆæœ¬çš„å…‹éš†ä»£ç åº¦é‡
 Metric = []
 Matrix = []
 fileindex = 0
 clonedoc = xml.dom.minidom.parse(sys.argv[1] + clonefile_list[fileindex]) 
 cloneroot = clonedoc.documentElement              
 source_nodes = cloneroot.getElementsByTagName('source')
-#¿ËÂ¡¶ÈÁ¿ÌáÈ¡	
-#ÉèÖÃid
-id = 0
+#å…‹éš†åº¦é‡æå–	
 for sourceNode in source_nodes:                
-	#id = classid+CFidÎ´ÊµÏÖ£¬¼òµ¥Ê¹ÓÃÕûÊı´ó¼ÆÊı
-	id = id +1
-	#¿ËÂ¡Á£¶È
+	#å…‹éš†ç²’åº¦
+	#id = classid+CFid
 	e = int(sourceNode.getAttribute('endline'))
 	s = int(sourceNode.getAttribute('startline'))	
 	lines = e - s
-	#Halstead¶ÈÁ¿
+	#Halsteadåº¦é‡
 	uotNode = sourceNode.getElementsByTagName('UniqueOprator')[0]
 	uotvalue = int(uotNode.childNodes[0].nodeValue)
 	UOT = str(uotvalue))
@@ -81,12 +44,12 @@ for sourceNode in source_nodes:
 	nodNode = sourceNode.getElementsByTagName('TotalOprand')[0]
 	nodvalue = int(nodNode.childNodes[0].nodeValue)
 	NOD = str(nodvalue))		
-	#²ÎÊı¸öÊı
+	#å‚æ•°ä¸ªæ•°
 	if sourceNode.getElementsByTagName('methodInfo') == []:
 		NOP = '0'
 	else:
 		NOP = sourceNode.getElementsByTagName('methodInfo')[0].getAttribute('mParaNum')
-	#ÉÏÏÂÎÄĞÅÏ¢£¬Ä¬ÈÏÎª¶¨Òå
+	#ä¸Šä¸‹æ–‡ä¿¡æ¯ï¼Œé»˜è®¤ä¸ºå®šä¹‰
 	context = 'DEF'
 	flag = 1 if sourceNode.getElementsByTagName('blockInfo') == [] else 0
 	if flag == 0:
@@ -95,39 +58,34 @@ for sourceNode in source_nodes:
 		btype_real = btype_nodes[l - 1]
 		context = btype_real.childNodes[0].nodeValue
 		CTX = context
-	#ÌáÈ¡¿ËÂ¡ÊÙÃüºÍÊÇ·ñ·¢Éú±ä»¯
+	#æå–å…‹éš†å¯¿å‘½å’Œæ˜¯å¦å‘ç”Ÿå˜åŒ–
 	clonelife = 1
-	ischange = 0
-	changetimes = 0
-	Metric =[id, lines, UOT, UOD, NOT, NOD, NOP, CTX, Clonelife, ischange, changetimes]
+	clonechange = 0
+	Metric.extend(id, lines, UOT, UOD, NOT, NOD, pattern_same,pattern_add, pattern_delete, pattern_split, pattern_inconsis, pattern_consis, clonelife, clonechange)
 	Matrix.append(Metric)	
-
-#½«µÚÒ»¸ö°æ±¾µÄ¿ËÂ¡×éĞÅÏ¢¶ÈÁ¿Ğ´ÈëWEKA¸ñÊ½ÎÄ¼ş
-mkdir(outputpath)
-resultsfile = outputpath + clonefile_list[0] + '.arff'
-arff.dump(resultsfile, Matrix, relation="clone_fragment_metrics", names=['id', 'lines', 'UOT', 'UOD', 'NOT', 'NOD', 'NOP','CTX', 'clonelife', 'ischange', 'changetimes'])
+#å°†Matricå†™å…¥æ–‡ä»¶ä¸­
+resultsfile = sys.argv[1] + clonefile_list[fileindex] + results
+arff.dump(resultsfile, Matrix, relation="clonegroup_metrics", names=['classid', 'classnumber', 'classnlines', 'classsimilarity', 'samefile', 'pattern_static', 'pattern_same','pattern_add', 'pattern_delete', 'pattern_split', 'pattern_inconsis', 'pattern_consis', 'clonelife'])
 
 
-#ºóĞø°æ±¾µÄ¿ËÂ¡Æ¬¶Î¶ÈÁ¿ÌáÈ¡
-for i in range(1,len(clonefile_list)):
 
-	clonedoc = xml.dom.minidom.parseString(convert_ecoding(sys.argv[1] + clonefile_list[i]))
-	cloneroot = clonedoc.documentElement
-	source_nodes = cloneroot.getElementsByTagName('source')
-
+#åç»­ç‰ˆæœ¬çš„å…‹éš†ç‰‡æ®µåº¦é‡æå–
+for clonefile in clonefile_list[1,len(clonefile_list)]:
 	Metric = []
 	Matrix = []
 	fileindex = fileindex + 1
-	#¿ËÂ¡¶ÈÁ¿ÌáÈ¡
-	id = 0
+	clonedoc = xml.dom.minidom.parse(sys.argv[1] + clonefile_list[fileindex]) 
+	cloneroot = clonedoc.documentElement              
+	source_nodes = cloneroot.getElementsByTagName('source')
+	#å…‹éš†åº¦é‡æå–
+	CFID
 	for sourceNode in source_nodes:                
-		#id = classid+CFidÎ´ÊµÏÖ£¬¼òµ¥Ê¹ÓÃÕûÊı¼ÆÊı
-		id = id + 1
-		#¿ËÂ¡Á£¶È
+		#å…‹éš†ç²’åº¦
+		#id = classid+CFid
 		e = int(sourceNode.getAttribute('endline'))
 		s = int(sourceNode.getAttribute('startline'))	
 		lines = e - s
-		#Halstead¶ÈÁ¿
+		#Halsteadåº¦é‡
 		uotNode = sourceNode.getElementsByTagName('UniqueOprator')[0]
 		uotvalue = int(uotNode.childNodes[0].nodeValue)
 		UOT = str(uotvalue))
@@ -140,13 +98,14 @@ for i in range(1,len(clonefile_list)):
 		nodNode = sourceNode.getElementsByTagName('TotalOprand')[0]
 		nodvalue = int(nodNode.childNodes[0].nodeValue)
 		NOD = str(nodvalue))
-		#²ÎÊı¸öÊı
+		
+		#å‚æ•°ä¸ªæ•°
 		NOP
 		if sourceNode.getElementsByTagName('methodInfo') == []:
 			NOP = '0'
 		else:
 			NOP = sourceNode.getElementsByTagName('methodInfo')[0].getAttribute('mParaNum')
-		#ÉÏÏÂÎÄĞÅÏ¢£¬Ä¬ÈÏÎª¶¨Òå
+		#ä¸Šä¸‹æ–‡ä¿¡æ¯ï¼Œé»˜è®¤ä¸ºå®šä¹‰
 		context = 'DEF'
 		flag = 1 if sourceNode.getElementsByTagName('blockInfo') == [] else 0
 		if flag == 0:
@@ -155,13 +114,10 @@ for i in range(1,len(clonefile_list)):
 			btype_real = btype_nodes[l - 1]
 			context = btype_real.childNodes[0].nodeValue
 			CTX = context
-		Metric =[id, lines, UOT, UOD, NOT, NOD, NOP, CTX]
-			
-		#ÌáÈ¡¿ËÂ¡ÊÙÃüºÍÊÇ·ñ·¢Éú±ä»¯ÒÔ¼°±ä»¯´ÎÊı
-		#clonelife and clonechangetime
-		Metric.extend(clonelife, ischange, changetimes)
-		Matrix.append(Metric)
-	#½«MatricĞ´ÈëÎÄ¼şÖĞ
-	resultsfile = outputpath + clonefile_list[i] + '.arff'
-	arff.dump(resultsfile, Matrix, relation="clone_fragment_metrics", names=['id', 'lines', 'UOT', 'UOD', 'NOT', 'NOD', 'NOP','CTX', 'clonelife', 'ischange', 'changetimes'])
-print 'Succeed'
+		Metric.extend(id, lines, UOT, UOD, NOT, NOD, pattern_same,pattern_add, pattern_delete, pattern_split, pattern_inconsis, pattern_consis, clonelife)
+		Matrix.append(Metric)	
+	#æå–å…‹éš†å¯¿å‘½å’Œæ˜¯å¦å‘ç”Ÿå˜åŒ–
+	#clonelife and clonechangetime
+	#å°†Matricå†™å…¥æ–‡ä»¶ä¸­
+	resultsfile = sys.argv[1] + clonefile_list[fileindex] + results
+	arff.dump(resultsfile, Matrix, relation="clonegroup_metrics", names=['classid', 'classnumber', 'classnlines', 'classsimilarity', 'samefile', 'pattern_static', 'pattern_same','pattern_add', 'pattern_delete', 'pattern_split', 'pattern_inconsis', 'pattern_consis', 'clonelife'])

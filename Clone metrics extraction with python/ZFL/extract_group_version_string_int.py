@@ -3,9 +3,12 @@
 
 #分版本抽取克隆组的度量值
 #使用慈萌和李智超结果
+
 #使用方法
-#命令+目录名1+目录名2
+#命令+目录名1+目录名2+目录3
 #extract_group.py path\CRDFiles\blocks\  path\MAPFiles\blocks\ path\arff_result\
+
+#结果以string类型的字面值保存
 
 import re, sys, os
 import xml.dom.minidom
